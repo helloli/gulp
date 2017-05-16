@@ -42,9 +42,10 @@ gulp.task('babel', function () {
         .pipe(sourcemaps.init())
             .pipe(babel({
                 // 默认转为commonjs，这个插件是转换为AMD的，这样才能让require使用
-                // 'plugins': ['transform-es2015-modules-amd'],
+                // 'plugins': ['transform-es2015-modules-amd', 'transform-runtime'],
                 // es6转es5
-                'presets': ['es2015']
+                'presets': ['es2015', 'stage-3'],
+                'plugins': ['transform-runtime']
             }))
         .pipe(sourcemaps.write('./map'))
         .pipe(gulp.dest('./amd'));
