@@ -1,0 +1,99 @@
+# 指定es6编译插件
+parser: babel-eslint
+parserOptions:
+ ecmaVersion: 6
+ sourceType: module
+ ecmaFeatures: 
+     jsx: true
+# 添加全局环境，引入全局变量
+env:
+ node: true
+ browser: true
+ es6: true
+ commonjs: true
+ jquery: true
+# 全局变量
+globals:
+  _: true
+  http: true
+  StiVue: true
+# 引用库
+extends: 'eslint:recommended'
+
+# 自定义规则
+rules: 
+ # 不适用分号
+ semi: 
+  - 2
+  - 'always'
+ # 允许使用console
+ no-console: 0
+ # 允许使用debugger
+ no-debugger: 0
+ # 不使用var
+ no-var: 2
+ # if语句包含一个return语句， else就多余
+ no-else-return: 2
+ # 禁止与null不进行类型比较(===)
+ no-eq-null: 2
+ # 建议将经常出现的数字提取为变量
+ no-magic-numbers: [0, {ignoreArrayIndexes: true}]
+ # 禁止对变量重复命名
+ no-redeclare: [2, {builtinGlobals: true}]
+ # 建议不必要的字符串拼接
+ no-useless-concat: 1
+ # 禁止变量声明覆盖外层作用域
+ no-shadow: [1, {builtinGlobals: true, allow: [state, resolve, reject, done, localStorage, event, top, http, StiVue]}]
+ # 允许出现未使用过的变量
+ no-unused-vars: 0
+ # 将立即执行的函数包裹起来
+ wrap-iife:
+  - 2
+  - 'inside'
+ # 表达式周围留空格
+ space-infix-ops: 1
+ # 强制使用JSDoc
+ valid-jsdoc: 0
+ # 强制使用大括号
+ curly: 2
+ # 约束对for-in进行原型判断
+ guard-for-in: 1
+ # 数组统一带空格
+ array-bracket-spacing: [2, 'always', {singleValue: false, objectsInArrays: false, arraysInArrays: false}]
+ # 单行代码带空格
+ block-spacing: 2
+ # 大括号风格
+ brace-style: 2
+ # 都好周围的空格
+ comma-spacing: 2
+ # this变量名
+ consistent-this: 
+  - 2
+  - 'that'
+ # jsx中属性统一使用单引号
+ jsx-quotes: 
+  - 2
+  - prefer-single
+ # 行的最大长度
+ max-len: 
+  - 2
+  - 100
+  - 
+   ignoreComments: true 
+   ignoreTrailingComments: true
+   ignoreStrings: true
+   ignoreTemplateLiterals: true
+ # 最大行数
+ max-lines: [1, {max: 500, skipComments: true, skipBlankLines: true}]
+ # 构造函数规范
+ new-cap: [2, {newIsCap: true}]
+ # 变量空一行
+ newline-after-var: 
+  - 2
+  - 'always'
+ # return语句前加空行
+ newline-before-return: 2 
+ # 禁止出现唯一if语句
+ no-lonely-if: 2
+ # 禁止出现多个空行
+ no-multiple-empty-lines: [2, {max: 1, maxEOF: 2}]

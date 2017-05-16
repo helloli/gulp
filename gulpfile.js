@@ -5,6 +5,7 @@
  *
  *  clean：清除amd文件夹
  *  babel：es6转为AMD格式的es5
+ *  cached/progeny: 进行缓存增量编译
  *  less：less文件转为带prefix的css文件
  *  copy：所有非es6和less格式的文件直接复制到amd文件夹
  *  watch：监控任务，监控es6文件夹内的文件变化，并根据增量执行任务
@@ -14,6 +15,7 @@
 var gulp = require('gulp'),
     del = require('del'),
     babel = require('gulp-babel'),
+    eslint = require('gulp-eslint'),
     less = require('gulp-less'),
     autoprefixer = require('gulp-autoprefixer'),
     cssmin = require('gulp-cssmin'),
@@ -39,6 +41,9 @@ gulp.task('babel', function () {
         }))
         .pipe(cached('watchBabel'))
         .pipe(progeny())
+        .pipe(eslint())
+        .pipe(eslint.format())
+        // .pipe(eslint.failAfterError())
         .pipe(sourcemaps.init())
             .pipe(babel({
                 // 默认转为commonjs，这个插件是转换为AMD的，这样才能让require使用
@@ -90,6 +95,7 @@ gulp.task('watch', function () {
                     case 'es6':
                         // 清除cached缓存
                         delete cached.caches.watchBabel[e.path];
+                        delete cached.caches.watchLint[e.path];
                         // 删除amd文件夹中对应的js文件
                         del(e.path.replace(/\\/g, '/').replace(/\/es6\//, '/amd/').replace(/\.es6$/, '.js'), {
                             force: true
