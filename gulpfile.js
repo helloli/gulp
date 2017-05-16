@@ -10,6 +10,7 @@
  *  copy：所有非es6和less格式的文件直接复制到amd文件夹
  *  watch：监控任务，监控es6文件夹内的文件变化，并根据增量执行任务
  *  plumber: 出错不停止watch
+ *  browserSync: 热替换
  */
 
 var gulp = require('gulp'),
@@ -24,7 +25,8 @@ var gulp = require('gulp'),
     progeny = require('gulp-progeny'),
     sourcemaps = require('gulp-sourcemaps'),
     gulpSequence = require('gulp-sequence'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    browserSync = require("browser-sync").create();
 
 // 清空amd文件夹
 gulp.task('clean', function () {
@@ -53,7 +55,8 @@ gulp.task('babel', function () {
                 'plugins': ['transform-runtime']
             }))
         .pipe(sourcemaps.write('./map'))
-        .pipe(gulp.dest('./amd'));
+        .pipe(gulp.dest('./amd'))
+        .pipe(browserSync.reload({stream:true}));
 });
 
 // less转css
@@ -74,7 +77,8 @@ gulp.task('less', function () {
                 suffix: '.min'
             }))
         .pipe(sourcemaps.write('./map'))
-        .pipe(gulp.dest('./amd'));
+        .pipe(gulp.dest('./amd'))
+        .pipe(browserSync.reload({stream:true}));
 });
 
 // 将所有非less/es6文件直接copy
@@ -82,11 +86,18 @@ gulp.task('copy', function () {
     return gulp.src(['./es6/**/*', '!./es6/**/*.es6', '!./es6/**/*.less'])
         .pipe(cached('watchCopy'))
         .pipe(progeny())
-        .pipe(gulp.dest('./amd'));
+        .pipe(gulp.dest('./amd'))
+        .pipe(browserSync.reload({stream:true}));
 });
 
 // 监听文件变化，根据增量执行babel、less和copy。删除es6文件夹中源码中的文件也会对amd文件夹中对应的文件进行删除
 gulp.task('watch', function () {
+    browserSync.init({
+        port: 2017,
+        server: {
+            baseDir: ['amd']
+        }
+    });
     return gulp.watch(['es6/**/*'], ['babel', 'less', 'copy'])
         .on('change', function (e) {
             if (e.type == 'deleted') {
