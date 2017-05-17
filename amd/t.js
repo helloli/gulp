@@ -14,6 +14,10 @@ var _promise2 = _interopRequireDefault(_promise);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * async/await 测试
+ */
+
 var f = function f() {
     return new _promise2.default(function (resolve, reject) {
         setTimeout(function () {

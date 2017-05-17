@@ -1,3 +1,7 @@
+/**
+ * async/await 测试
+ */
+
 const f = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {

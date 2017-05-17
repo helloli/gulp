@@ -35,7 +35,7 @@ gulp.task('clean', function () {
     });
 });
 
-// es6转AMD格式的es5
+// es6转es5
 gulp.task('babel', function () {
     return gulp.src('./es6/**/*.es6')
         .pipe(plumber(function (e) {
