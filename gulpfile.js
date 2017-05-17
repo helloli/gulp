@@ -92,6 +92,7 @@ gulp.task('copy', function () {
 
 // 监听文件变化，根据增量执行babel、less和copy。删除es6文件夹中源码中的文件也会对amd文件夹中对应的文件进行删除
 gulp.task('watch', function () {
+    // 启动热加载服务，默认会打开localhost:2017，根目录为amd文件夹
     browserSync.init({
         port: 2017,
         server: {
