@@ -1,4 +1,2 @@
-'use strict';
-
-console.log('12');
+"use strict";
 //# sourceMappingURL=map/index.js.map

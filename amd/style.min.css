@@ -1,2 +1,2 @@
-body{font-size:16px;background-color:#ccc}body div{font-size:38px}
+html,html body{height:100%}html body{padding:0;margin:0;font-size:16px;background-color:#fff}html body .modal-wrap{display:table;width:100%;height:100%}html body .modal-wrap .modal-content-wrap{background-color:#ccc;display:table-cell;vertical-align:middle;text-align:center}html body .modal-wrap .modal-content-wrap .modal-content{display:inline-block;background-color:orange}
 /*# sourceMappingURL=map/style.min.css.map */
