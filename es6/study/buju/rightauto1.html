@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>左侧固定右侧自适应1</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+    .left {
+      float: left;
+      width: 200px;
+      background-color: #ccc;
+      height: 100%;
+    }
+    .right {
+      overflow: hidden; 
+      height: 100%;
+      /*margin-left: 200px;*/
+      background: url(./1.jpg) no-repeat;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">左边</div>
+  <div class="right">右边</div>
+</body>
+</html>

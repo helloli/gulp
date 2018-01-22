@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>闭包</title>
+</head>
+<body>
+  <script>
+    function init() {
+        var name = "Mozilla"; // name is a local variable created by init
+        function displayName() { // displayName() is the inner function, a closure
+            alert (name); // displayName() uses variable declared in the parent function    
+        }
+        displayName();    
+    }
+    init();
+  </script>
+</body>
+</html>

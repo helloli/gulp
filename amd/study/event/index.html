@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>js事件</title>
+  <style>
+    .a {
+      height: 500px;
+      width: 500px;
+      padding: 100px;
+      background-color: #ccc;
+    }
+    .b {
+      height: 200px;
+      width: 200px;
+      background-color: orange;
+    }
+    p {
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="a">a
+    <div class="b">b</div>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+  </div>
+  <script>
+    var $ = function (el) {
+      return document.querySelector(el);
+    }
+    $('.a').addEventListener('click', function () {
+      console.log(this);
+    }, true)
+    $('.b').addEventListener('click', function (e) {
+      console.log(this);
+      // e.stopPropagation();
+      // this.cancelBubble = true;
+    })
+
+    $('.a').addEventListener('click', function (e) {
+      var ev = e || window.event;
+      var target = e.target || e.srcElment;
+      if(e.target.nodeName.toLowerCase() === 'p') {
+        console.log('yes');
+      }
+    })
+  </script>
+</body>
+</html>
